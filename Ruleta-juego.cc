@@ -1,4 +1,5 @@
 #include <iostream>
+#include <string>
 
 const int JugadoresMax = 6;
 
@@ -14,6 +15,7 @@ struct Jugadores
 void MenuInterativo();
 void RegistrarJugadores(Jugadores *jugadores[]);
 void JugadoresRegistrados(Jugadores *jugadores[]);
+void MenuJuego();
 
 // Colores ANSI para los jugadores
 const char* colores[] =
@@ -27,10 +29,12 @@ const char* colores[] =
 };
 
 int main() {
-    Jugadores *jugadores[JugadoresMax];
-
-    MenuInterativo();
+    Jugadores *jugadores[JugadoresMax] = {nullptr}; //Cambio para que aun no apunte a nada
     int a;
+
+    do
+    {
+    MenuInterativo();
     std::cout << "-";
     std::cin >> a;
 
@@ -39,6 +43,7 @@ int main() {
     case 1: {
         RegistrarJugadores(jugadores);
         JugadoresRegistrados(jugadores);
+        MenuJuego();
         break;
     }
     case 2:
@@ -50,7 +55,63 @@ int main() {
     default:
         break;
     }
-    return 0;
+} while (a != 4 && a != 1);
+
+// Liberar memoria de los jugadores
+ for (int i = 0; i < JugadoresMax; i++) {
+        delete jugadores[i];
+    }
+
+return 0;
+}
+
+void MenuJuego(){
+    int opcion = 0;
+std :: cout << "--------Apuestas--------\n";
+std :: cout << "> 1.... Pleno\n";
+std :: cout << "> 2.... Dividida\n";
+std :: cout << "> 3.... Calle\n";
+std :: cout << "> 4.... Esquina\n";
+std :: cout << "> 5.... Linea\n";
+std :: cout << "> 6.... Rojo o Negro\n";
+std :: cout << "> 7.... Par o impar\n";
+std :: cout << "> 8.... Mitades\n";
+std :: cout << "> 9.... Docenas\n";
+std:: cout << "Seleccione una opcion: ";
+std::cin >> opcion;
+switch (opcion)
+{
+case 1:
+    
+    break;
+case 2:
+
+    break;
+case 3:
+
+    break;
+case 4:
+
+    break;
+case 5:
+
+    break;
+case 6:
+
+    break;
+case 7:
+
+    break;
+case 8:
+
+    break;
+case 9:
+
+    break;
+
+default:
+    break;
+}
 }
 
 void MenuInterativo()
@@ -94,8 +155,8 @@ void JugadoresRegistrados(Jugadores *jugadores[]) {
     std::cout << '\n';
     std::cout << "Lista de jugadores registrados:\n\n";
 
-    for (int i = 0; i <+ JugadoresMax; i++) {
-      
+    for (int i = 0; i <+ JugadoresMax && jugadores[i] != nullptr; i++) //Para que el bucle for verifique que haya un jugador registrado. 
+    {
         const char* color = colores[i % 6];  
         std::cout << color;  // Aplicar el color
         std::cout << jugadores[i]->nombre_jugador << " saldo: $" << jugadores[i]->monedero << "\n"  << "\033[0m\n"; ;
